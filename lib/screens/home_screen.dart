@@ -10,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TMDBService _tmdbService = TMDBService();
+  final TextEditingController _searchController = TextEditingController();
   
   List<Movie>? _trendingMovies;
   List<Movie>? _nowPlayingMovies;
@@ -81,9 +82,30 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 20,),
-            const Text('What do you want to watch?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-            SizedBox(height: 5,),
+            SizedBox(height: 30,),
+            const Text(' What do you want to watch?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+            SizedBox(height: 5,),     
+            Container(
+              height: 55,
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      // Perform the search here
+                    },
+                  ),
+
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10,), 
             CarouselSlider.builder(
               itemCount: _trendingMovies?.length ?? 0,
               itemBuilder: (BuildContext context, int index, int realIndex) {
@@ -153,11 +175,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomeScreen(),
-  ));
 }
