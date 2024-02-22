@@ -51,18 +51,33 @@ class TMDBService {
   }
 
   Future<List<Movie>> fetchUpcomingMovies() async {
-  try {
-    final response = await _dio.get(
-      'https://api.themoviedb.org/3/movie/upcoming?api_key=$_apiKey',
-    );
-    final List<Movie> movies = (response.data['results'] as List)
-        .map((json) => Movie.fromJson(json))
-        .toList();
-    return movies;
-  } catch (error, stacktrace) {
-    print("Exception occured: $error stackTrace: $stacktrace");
-    return [];
+    try {
+      final response = await _dio.get(
+        'https://api.themoviedb.org/3/movie/upcoming?api_key=$_apiKey',
+      );
+      final List<Movie> movies = (response.data['results'] as List)
+          .map((json) => Movie.fromJson(json))
+          .toList();
+      return movies;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return [];
+    }
   }
-}
+
+  Future<List<Movie>> fetchTopRatedMovies() async {
+    try {
+      final response = await _dio.get(
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=$_apiKey',
+      );
+      final List<Movie> movies = (response.data['results'] as List)
+          .map((json) => Movie.fromJson(json))
+          .toList();
+      return movies;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return [];
+    }
+  }
 
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:movie_application/screens/home_screen.dart';
+import 'package:movie_application/screens/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const BottomBar(),
           ),
         );
       },
